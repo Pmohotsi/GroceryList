@@ -51,6 +51,7 @@ String name = mCursor.getString(mCursor.getColumnIndex(GroceryListsContract.Groc
 
     @Override
     public int getItemCount() {
+
         return mCursor.getCount();
     }
     public void swapCursor(Cursor newCursor)

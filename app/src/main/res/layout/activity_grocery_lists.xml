@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    tools:context=".GroceryLists">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="60dp"
+        android:id="@+id/textField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:counterMaxLength="4"
+
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+
+        android:hint="Enter Grocery List Name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtNewGroceryList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+             />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:background="@drawable/custombutton"
+            android:id="@+id/btnAddList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add New Grocery List"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/rcvList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

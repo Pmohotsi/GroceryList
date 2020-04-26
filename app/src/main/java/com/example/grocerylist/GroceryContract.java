@@ -2,14 +2,13 @@ package com.example.grocerylist;
 
 import android.provider.BaseColumns;
 
-public class GroceryContract  {
+class GroceryContract {
 
-    public static final class GroceryEntry implements BaseColumns
-    {
-        public static final String TABLE_NAME ="GroceryList";
-        public static final String COLUMN_NAME = "name";
-        public static final String COLUMN_AMOUNT = "amount";
-        public static final String COLUMN_TIMESTAMP ="timestamp";
+    static final class GroceryEntry implements BaseColumns {
+        static final String TABLE_NAME = "GroceryList";
+        static final String COLUMN_NAME = "name";
+        static final String COLUMN_AMOUNT = "amount";
+        static final String COLUMN_TIMESTAMP = "timestamp";
     }
 
 }

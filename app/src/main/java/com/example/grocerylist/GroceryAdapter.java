@@ -13,21 +13,42 @@ import androidx.recyclerview.widget.RecyclerView;
 public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryViewHolder> {
     private Context mContext;
     private Cursor mCursor;
+    private OnListClickListener mListener;
 
-    public GroceryAdapter(Context context, Cursor cursor) {
+    GroceryAdapter(Context context, Cursor cursor) {
         mContext = context;
         mCursor = cursor;
+
+    }
+    public interface OnListClickListener
+    {
+        void onItemCLick(int position);
+    }
+    public void setOnListClickListener(GroceryAdapter.OnListClickListener listener)
+    {
+        mListener = listener;
     }
 
+    static class GroceryViewHolder extends RecyclerView.ViewHolder {
+        TextView nameText;
+        TextView countText;
 
-    public class GroceryViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameText;
-        public TextView countText;
-
-        public GroceryViewHolder(@NonNull View itemView) {
+        GroceryViewHolder(@NonNull View itemView, final OnListClickListener listener) {
             super(itemView);
             nameText = itemView.findViewById(R.id.tvGroceryItemName);
             countText = itemView.findViewById(R.id.tvGroceryItemQuantity);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemCLick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -36,7 +57,9 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
     public GroceryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.customitems, parent, false);
-        return new GroceryViewHolder(view);
+
+
+        return new GroceryViewHolder(view,mListener);
     }
 
     @Override
@@ -57,15 +80,13 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
     public int getItemCount() {
         return mCursor.getCount();
     }
-    public void swapCursor(Cursor newCursor)
-    {
-        if(mCursor != null)
-        {
+
+    void swapCursor(Cursor newCursor) {
+        if (mCursor != null) {
             mCursor.close();
         }
         mCursor = newCursor;
-        if(newCursor != null)
-        {
+        if (newCursor != null) {
             notifyDataSetChanged();
         }
     }

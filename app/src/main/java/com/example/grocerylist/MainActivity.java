@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.example.grocerylist.ApplicationClass.switchViews;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String MY_SHARED_PREFERENCES_NAME = "com.example.grocerylist";
@@ -41,43 +43,41 @@ public class MainActivity extends AppCompatActivity {
             switchViews(btnLogin,btnRegister);
         }
 
-
-
-btnRegister.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if(isPasswordValid(edtPassword.getText().toString()))
-        {
-            SharedPreferences.Editor editor = myPrefs.edit();
-            editor.putString(PASSWORD, edtPassword.getText().toString().trim());
-            editor.apply();
-            currentUserPassword = myPrefs.getString(PASSWORD,"");
-            edtPassword.setError(null);
-            edtPassword.setText("");
-            switchViews(btnLogin,btnRegister);
-        }else
-        {
-            edtPassword.setError("Invalid length / pattern");
-        }
-    }
-});
-btnLogin.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if(isPasswordValid(edtPassword.getText().toString()))
-        {
-            if(edtPassword.getText().toString().equals(currentUserPassword))
-            {
-             startActivity(new Intent(getApplicationContext(),GroceryLists.class));
-               //startActivity(new Intent(getApplicationContext(),GroceryItems.class));
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPasswordValid(edtPassword.getText().toString()))
+                {
+                    SharedPreferences.Editor editor = myPrefs.edit();
+                    editor.putString(PASSWORD, edtPassword.getText().toString().trim());
+                    editor.apply();
+                    currentUserPassword = myPrefs.getString(PASSWORD,"");
+                    edtPassword.setError(null);
+                    edtPassword.setText("");
+                    switchViews(btnLogin,btnRegister);
+                }else
+                {
+                    edtPassword.setError("Invalid length / pattern");
+                }
             }
-            else
-            {
-                edtPassword.setError("Incorrect password.");
+        });
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPasswordValid(edtPassword.getText().toString()))
+                {
+                    if(edtPassword.getText().toString().equals(currentUserPassword))
+                    {
+                       startActivity(new Intent(getApplicationContext(),GroceryLists.class));
+                       // startActivity(new Intent(getApplicationContext(),GroceryItems.class));
+                    }
+                    else
+                    {
+                        edtPassword.setError("Incorrect password.");
+                    }
+                }
             }
-        }
-    }
-});
+        });
 
 
         validatePasswordInput(edtPassword, btnLogin);
@@ -104,18 +104,13 @@ btnLogin.setOnClickListener(new View.OnClickListener() {
             public void afterTextChanged(Editable s) {
                 if (!isPasswordValid(s.toString())) {
                     etPassword.setError("(passcode must be 4 characters)");
-                  //  btnLogin.setVisibility(View.GONE);
+                    //  btnLogin.setVisibility(View.GONE);
                 } else {
-                   // btnLogin.setVisibility(View.VISIBLE);
+                    // btnLogin.setVisibility(View.VISIBLE);
                     etPassword.setError(null);
                 }
             }
         });
     }
-    public static void switchViews(View showView, View hideView) {
-        showView.setVisibility(View.VISIBLE);
-        hideView.setVisibility(View.GONE);
-    }
 
 }
-

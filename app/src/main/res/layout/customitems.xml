@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:background="@color/design_default_color_primary_dark"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="10dp"
-
     android:layout_margin="5dp"
-    >
+    android:background="@color/design_default_color_primary_dark"
+    android:orientation="horizontal"
+
+    android:padding="10dp">
 
 
     <TextView
@@ -20,6 +19,7 @@
         android:text="Grocery List Name"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
+
     <TextView
         android:id="@+id/tvGroceryItemQuantity"
         android:layout_width="wrap_content"
@@ -27,6 +27,7 @@
         android:layout_margin="8dp"
         android:layout_weight="2"
         android:padding="8dp"
+        android:gravity="end"
         android:text="Grocery List Name"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />

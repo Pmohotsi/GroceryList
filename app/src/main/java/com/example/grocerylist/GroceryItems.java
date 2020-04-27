@@ -61,6 +61,7 @@ public class GroceryItems extends AppCompatActivity {
             public void onItemCLick(int position) {
 
                 showToast("clicked :" + position);
+
             }
         });
 

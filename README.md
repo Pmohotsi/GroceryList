@@ -25,9 +25,12 @@ User can:
 
 ## How to setup the application
 
-User can:
-*Perform a Git Fork on the repository
-*Perform a Git Clone from your Github Repo to create a local clone of the project
-*Change Directory to the folder where you created the clone
+* Perform a Git Fork on the repository
+* Perform a Git Clone from your Github Repo to create a local clone of the project
+* Change Directory to the folder where you created the clone
 * Enjoy :-)
 
+## Technologies
+ * Android Studio
+ * SQLite
+ 

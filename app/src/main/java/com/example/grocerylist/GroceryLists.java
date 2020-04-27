@@ -1,10 +1,13 @@
 package com.example.grocerylist;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,11 +42,31 @@ public class GroceryLists extends AppCompatActivity {
         edtNewGroceryList = findViewById(R.id.edtNewGroceryList);
         Button btnAddList = findViewById(R.id.btnAddList);
 
+
+        new ItemTouchHelper(new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+                return 0;
+            }
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+          removeItem((int) viewHolder.itemView.getTag());
+            }
+        }).attachToRecyclerView(recyclerView);
         mAdapter.setOnItemClickListener(new GroceryListsAdapter.OnItemClickListener() {
             @Override
             public void onItemCLick(int position) {
+           // removeItem();
 
                 startActivity(new Intent(getApplicationContext(),GroceryItems.class));
+    //showToast(position+" ");
+
             }
         });
 
@@ -55,10 +78,7 @@ public class GroceryLists extends AppCompatActivity {
         });
     }
 
-    public void changeText1(String text)
-    {
 
-    }
     private void addGroceryList() {
 
         if (!edtNewGroceryList.getText().toString().trim().isEmpty()) {
@@ -76,6 +96,14 @@ public class GroceryLists extends AppCompatActivity {
 
     }
 
+    private void removeItem(long id)
+    {
+        mDatabase.delete(GroceryListsContract.GroceryListEntry.TABLE_NAME,
+                GroceryListsContract.GroceryListEntry._ID + "==" + id,null);
+        mAdapter.swapCursor(getAllItems());
+        showToast(GroceryListsContract.GroceryListEntry._ID +" ");
+    }
+
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -91,4 +119,5 @@ public class GroceryLists extends AppCompatActivity {
                 GroceryListsContract.GroceryListEntry.COLUMN_TIMESTAMP + " ASC"
         );
     }
+
 }

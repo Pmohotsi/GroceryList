@@ -59,8 +59,25 @@ public class GroceryItems extends AppCompatActivity {
         mAdapter.setOnListClickListener(new GroceryAdapter.OnListClickListener() {
             @Override
             public void onItemCLick(int position) {
+//                AlertDialog.Builder builder = buildAlertDialog(GroceryItems.this,
+//                        "View Item", "Do you want to Buy or Remove item from list?");
+//
+//                builder.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+//
+//                builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        removeItem(position);
+//
+//                    }
+//                });
+//                builder.create().show();
 
-                showToast("clicked :" + position);
 
             }
         });
@@ -118,6 +135,7 @@ public class GroceryItems extends AppCompatActivity {
                 builder.setPositiveButton("Add New Item to grocery list", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
 
                     }
                 });

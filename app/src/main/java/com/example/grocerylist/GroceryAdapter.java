@@ -1,7 +1,10 @@
 package com.example.grocerylist;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.example.grocerylist.ApplicationClass.buildAlertDialog;
+
 public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryViewHolder> {
-    private Context mContext;
+    static Context mContext;
     private Cursor mCursor;
     private OnListClickListener mListener;
 
@@ -20,12 +25,12 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
         mCursor = cursor;
 
     }
-    public interface OnListClickListener
-    {
+
+    public interface OnListClickListener {
         void onItemCLick(int position);
     }
-    public void setOnListClickListener(GroceryAdapter.OnListClickListener listener)
-    {
+
+    public void setOnListClickListener(GroceryAdapter.OnListClickListener listener) {
         mListener = listener;
     }
 
@@ -33,7 +38,7 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
         TextView nameText;
         TextView countText;
 
-        GroceryViewHolder(@NonNull View itemView, final OnListClickListener listener) {
+        GroceryViewHolder(@NonNull final View itemView, final OnListClickListener listener) {
             super(itemView);
             nameText = itemView.findViewById(R.id.tvGroceryItemName);
             countText = itemView.findViewById(R.id.tvGroceryItemQuantity);
@@ -45,6 +50,25 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onItemCLick(position);
+
+                            AlertDialog.Builder builder = buildAlertDialog(mContext,
+                                    "View Item", "Do you want to Buy or Remove item from list?");
+
+                            builder.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    itemView.setBackgroundColor(Color.GRAY);
+                                }
+                            });
+
+                            builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+
+                                }
+                            });
+                            builder.create().show();
                         }
                     }
                 }
@@ -59,7 +83,7 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
         View view = inflater.inflate(R.layout.customitems, parent, false);
 
 
-        return new GroceryViewHolder(view,mListener);
+        return new GroceryViewHolder(view, mListener);
     }
 
     @Override

@@ -8,7 +8,7 @@ package com.example.grocerylist;
     static final class GroceryListEntry {
         static final String TABLE_NAME = "groceryList";
         static final String COLUMN_NAME = "name";
-        public static final int _ID = 0;
+        public static final String _ID = "_id";
         static final String COLUMN_TIMESTAMP = "timestamp";
     }
 }

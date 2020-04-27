@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +45,8 @@ public class GroceryListsAdapter extends RecyclerView.Adapter<GroceryListsAdapte
                          int position = getAdapterPosition();
                          if(position != RecyclerView.NO_POSITION)
                          {
-                              listener.onItemCLick(position);
+
+                             listener.onItemCLick( position);
                          }
                     }
                 }
@@ -67,6 +69,8 @@ public class GroceryListsAdapter extends RecyclerView.Adapter<GroceryListsAdapte
         }
         String name = mCursor.getString(mCursor.getColumnIndex(GroceryListsContract.GroceryListEntry.COLUMN_NAME));
         holder.nametext.setText(name);
+        long id = mCursor.getLong(mCursor.getColumnIndex(GroceryListsContract.GroceryListEntry._ID));
+        holder.itemView.setTag(id);
 
     }
 

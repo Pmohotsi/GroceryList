@@ -21,7 +21,7 @@ import androidx.annotation.Nullable;
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_GROCERYLISTS_TABLE = "CREATE TABLE " +
                 GroceryListEntry.TABLE_NAME + "( " +
-                //    GroceryListEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    GroceryListEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 GroceryListEntry.COLUMN_NAME + " TEXT NOT NULL, " +
                 GroceryListEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                 ");";

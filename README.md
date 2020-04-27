@@ -32,7 +32,3 @@ User can:
 *Change Directory to the folder where you created the clone
 *Enjoy :-)
 
-##Technologies
-
-*Android Studio
-*SQLite
